@@ -61,6 +61,7 @@ void Transmit_Config_Data_2_DAC_with_arg(uint16_t DAC_DATA_arg)
 		DAC_SCLK_S; //CLK Rise
 		DAC_SCLK_S; //CLK Fall
 	}
+    DAC_SDIO;
 	DAC_CS_H;
 	
 	//LDAC
