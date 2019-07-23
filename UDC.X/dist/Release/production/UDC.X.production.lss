@@ -1,0 +1,328 @@
+
+dist/Release/production/UDC.X.production.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000018  00800100  00000296  0000032a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000296  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000001  00800118  00800118  00000342  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000342  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000374  2**2
+                  CONTENTS, READONLY
+  5 .debug_info   000009f4  00000000  00000000  000003b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000096a  00000000  00000000  00000da8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000199  00000000  00000000  00001712  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000371  00000000  00000000  000018ab  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 56 00 	jmp	0xac	; 0xac <__ctors_end>
+   4:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+   8:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+   c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  10:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  14:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  18:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  1c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  20:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  24:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  28:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  2c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  30:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  34:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  38:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  3c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  40:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  44:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  48:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  4c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  50:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  54:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  58:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  5c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  60:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  64:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  68:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  6c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  70:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  74:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  78:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  7c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  80:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  84:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  88:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  8c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  90:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  94:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  98:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  9c:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  a0:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  a4:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+  a8:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__bad_interrupt>
+
+000000ac <__ctors_end>:
+  ac:	11 24       	eor	r1, r1
+  ae:	1f be       	out	0x3f, r1	; 63
+  b0:	cf ef       	ldi	r28, 0xFF	; 255
+  b2:	da e0       	ldi	r29, 0x0A	; 10
+  b4:	de bf       	out	0x3e, r29	; 62
+  b6:	cd bf       	out	0x3d, r28	; 61
+
+000000b8 <__do_copy_data>:
+  b8:	11 e0       	ldi	r17, 0x01	; 1
+  ba:	a0 e0       	ldi	r26, 0x00	; 0
+  bc:	b1 e0       	ldi	r27, 0x01	; 1
+  be:	e6 e9       	ldi	r30, 0x96	; 150
+  c0:	f2 e0       	ldi	r31, 0x02	; 2
+  c2:	02 c0       	rjmp	.+4      	; 0xc8 <__do_copy_data+0x10>
+  c4:	05 90       	lpm	r0, Z+
+  c6:	0d 92       	st	X+, r0
+  c8:	a8 31       	cpi	r26, 0x18	; 24
+  ca:	b1 07       	cpc	r27, r17
+  cc:	d9 f7       	brne	.-10     	; 0xc4 <__do_copy_data+0xc>
+
+000000ce <__do_clear_bss>:
+  ce:	21 e0       	ldi	r18, 0x01	; 1
+  d0:	a8 e1       	ldi	r26, 0x18	; 24
+  d2:	b1 e0       	ldi	r27, 0x01	; 1
+  d4:	01 c0       	rjmp	.+2      	; 0xd8 <.do_clear_bss_start>
+
+000000d6 <.do_clear_bss_loop>:
+  d6:	1d 92       	st	X+, r1
+
+000000d8 <.do_clear_bss_start>:
+  d8:	a9 31       	cpi	r26, 0x19	; 25
+  da:	b2 07       	cpc	r27, r18
+  dc:	e1 f7       	brne	.-8      	; 0xd6 <.do_clear_bss_loop>
+  de:	0e 94 7b 00 	call	0xf6	; 0xf6 <main>
+  e2:	0c 94 49 01 	jmp	0x292	; 0x292 <_exit>
+
+000000e6 <__bad_interrupt>:
+  e6:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000ea <_init>:
+  ea:	0e 94 8e 00 	call	0x11c	; 0x11c <ADRF_DAC_INIT>
+  ee:	83 e3       	ldi	r24, 0x33	; 51
+  f0:	90 e0       	ldi	r25, 0x00	; 0
+  f2:	0c 94 36 01 	jmp	0x26c	; 0x26c <USART_INIT>
+
+000000f6 <main>:
+  f6:	0e 94 75 00 	call	0xea	; 0xea <_init>
+  fa:	0e 94 3e 01 	call	0x27c	; 0x27c <Receive_From_PC>
+  fe:	c8 2f       	mov	r28, r24
+ 100:	0e 94 3e 01 	call	0x27c	; 0x27c <Receive_From_PC>
+ 104:	20 e0       	ldi	r18, 0x00	; 0
+ 106:	30 e0       	ldi	r19, 0x00	; 0
+ 108:	3c 2f       	mov	r19, r28
+ 10a:	e9 01       	movw	r28, r18
+ 10c:	c8 0f       	add	r28, r24
+ 10e:	d9 1f       	adc	r29, r25
+ 110:	0e 94 9e 00 	call	0x13c	; 0x13c <Transmit_Config_Data_2_IQ_Baseband_Filter>
+ 114:	ce 01       	movw	r24, r28
+ 116:	0e 94 db 00 	call	0x1b6	; 0x1b6 <Transmit_Config_Data_2_DAC_with_arg>
+ 11a:	ff cf       	rjmp	.-2      	; 0x11a <main+0x24>
+
+0000011c <ADRF_DAC_INIT>:
+ 11c:	25 9a       	sbi	0x04, 5	; 4
+ 11e:	57 9a       	sbi	0x0a, 7	; 10
+ 120:	6e 9a       	sbi	0x0d, 6	; 13
+ 122:	24 9a       	sbi	0x04, 4	; 4
+ 124:	2d 9a       	sbi	0x05, 5	; 5
+ 126:	76 98       	cbi	0x0e, 6	; 14
+ 128:	2c 98       	cbi	0x05, 4	; 5
+ 12a:	21 9a       	sbi	0x04, 1	; 4
+ 12c:	26 9a       	sbi	0x04, 6	; 4
+ 12e:	23 9a       	sbi	0x04, 3	; 4
+ 130:	22 9a       	sbi	0x04, 2	; 4
+ 132:	29 9a       	sbi	0x05, 1	; 5
+ 134:	2b 98       	cbi	0x05, 3	; 5
+ 136:	2a 98       	cbi	0x05, 2	; 5
+ 138:	2e 9a       	sbi	0x05, 6	; 5
+ 13a:	08 95       	ret
+
+0000013c <Transmit_Config_Data_2_IQ_Baseband_Filter>:
+ 13c:	5f 9a       	sbi	0x0b, 7	; 11
+ 13e:	81 e0       	ldi	r24, 0x01	; 1
+ 140:	90 e0       	ldi	r25, 0x00	; 0
+ 142:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <DELAY_US>
+ 146:	5f 98       	cbi	0x0b, 7	; 11
+ 148:	81 e0       	ldi	r24, 0x01	; 1
+ 14a:	90 e0       	ldi	r25, 0x00	; 0
+ 14c:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <DELAY_US>
+ 150:	5f 9a       	sbi	0x0b, 7	; 11
+ 152:	2d 98       	cbi	0x05, 5	; 5
+ 154:	e0 e0       	ldi	r30, 0x00	; 0
+ 156:	f1 e0       	ldi	r31, 0x01	; 1
+ 158:	30 e1       	ldi	r19, 0x10	; 16
+ 15a:	20 e4       	ldi	r18, 0x40	; 64
+ 15c:	2c 99       	sbic	0x05, 4	; 5
+ 15e:	06 c0       	rjmp	.+12     	; 0x16c <Transmit_Config_Data_2_IQ_Baseband_Filter+0x30>
+ 160:	95 b1       	in	r25, 0x05	; 5
+ 162:	80 81       	ld	r24, Z
+ 164:	82 95       	swap	r24
+ 166:	80 7f       	andi	r24, 0xF0	; 240
+ 168:	89 27       	eor	r24, r25
+ 16a:	0a c0       	rjmp	.+20     	; 0x180 <Transmit_Config_Data_2_IQ_Baseband_Filter+0x44>
+ 16c:	80 81       	ld	r24, Z
+ 16e:	81 11       	cpse	r24, r1
+ 170:	03 c0       	rjmp	.+6      	; 0x178 <Transmit_Config_Data_2_IQ_Baseband_Filter+0x3c>
+ 172:	85 b1       	in	r24, 0x05	; 5
+ 174:	83 27       	eor	r24, r19
+ 176:	04 c0       	rjmp	.+8      	; 0x180 <Transmit_Config_Data_2_IQ_Baseband_Filter+0x44>
+ 178:	95 b1       	in	r25, 0x05	; 5
+ 17a:	82 95       	swap	r24
+ 17c:	80 7f       	andi	r24, 0xF0	; 240
+ 17e:	89 2b       	or	r24, r25
+ 180:	85 b9       	out	0x05, r24	; 5
+ 182:	0f 92       	push	r0
+ 184:	0f 90       	pop	r0
+ 186:	00 00       	nop
+ 188:	8e b1       	in	r24, 0x0e	; 14
+ 18a:	82 27       	eor	r24, r18
+ 18c:	8e b9       	out	0x0e, r24	; 14
+ 18e:	8e b1       	in	r24, 0x0e	; 14
+ 190:	82 27       	eor	r24, r18
+ 192:	8e b9       	out	0x0e, r24	; 14
+ 194:	31 96       	adiw	r30, 0x01	; 1
+ 196:	81 e0       	ldi	r24, 0x01	; 1
+ 198:	e8 31       	cpi	r30, 0x18	; 24
+ 19a:	f8 07       	cpc	r31, r24
+ 19c:	f9 f6       	brne	.-66     	; 0x15c <Transmit_Config_Data_2_IQ_Baseband_Filter+0x20>
+ 19e:	2d 9a       	sbi	0x05, 5	; 5
+ 1a0:	08 95       	ret
+
+000001a2 <DELAY_US>:
+ 1a2:	20 e0       	ldi	r18, 0x00	; 0
+ 1a4:	30 e0       	ldi	r19, 0x00	; 0
+ 1a6:	28 17       	cp	r18, r24
+ 1a8:	39 07       	cpc	r19, r25
+ 1aa:	21 f0       	breq	.+8      	; 0x1b4 <DELAY_US+0x12>
+ 1ac:	00 00       	nop
+ 1ae:	2f 5f       	subi	r18, 0xFF	; 255
+ 1b0:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1b2:	f9 cf       	rjmp	.-14     	; 0x1a6 <DELAY_US+0x4>
+ 1b4:	08 95       	ret
+
+000001b6 <Transmit_Config_Data_2_DAC_with_arg>:
+ 1b6:	cf 93       	push	r28
+ 1b8:	df 93       	push	r29
+ 1ba:	cd b7       	in	r28, 0x3d	; 61
+ 1bc:	de b7       	in	r29, 0x3e	; 62
+ 1be:	a0 97       	sbiw	r28, 0x20	; 32
+ 1c0:	0f b6       	in	r0, 0x3f	; 63
+ 1c2:	f8 94       	cli
+ 1c4:	de bf       	out	0x3e, r29	; 62
+ 1c6:	0f be       	out	0x3f, r0	; 63
+ 1c8:	cd bf       	out	0x3d, r28	; 61
+ 1ca:	fe 01       	movw	r30, r28
+ 1cc:	31 96       	adiw	r30, 0x01	; 1
+ 1ce:	20 e2       	ldi	r18, 0x20	; 32
+ 1d0:	df 01       	movw	r26, r30
+ 1d2:	1d 92       	st	X+, r1
+ 1d4:	2a 95       	dec	r18
+ 1d6:	e9 f7       	brne	.-6      	; 0x1d2 <Transmit_Config_Data_2_DAC_with_arg+0x1c>
+ 1d8:	df 01       	movw	r26, r30
+ 1da:	20 e0       	ldi	r18, 0x00	; 0
+ 1dc:	30 e0       	ldi	r19, 0x00	; 0
+ 1de:	ac 01       	movw	r20, r24
+ 1e0:	02 2e       	mov	r0, r18
+ 1e2:	02 c0       	rjmp	.+4      	; 0x1e8 <Transmit_Config_Data_2_DAC_with_arg+0x32>
+ 1e4:	44 0f       	add	r20, r20
+ 1e6:	55 1f       	adc	r21, r21
+ 1e8:	0a 94       	dec	r0
+ 1ea:	e2 f7       	brpl	.-8      	; 0x1e4 <Transmit_Config_Data_2_DAC_with_arg+0x2e>
+ 1ec:	45 2f       	mov	r20, r21
+ 1ee:	44 1f       	adc	r20, r20
+ 1f0:	44 27       	eor	r20, r20
+ 1f2:	44 1f       	adc	r20, r20
+ 1f4:	50 e0       	ldi	r21, 0x00	; 0
+ 1f6:	4d 93       	st	X+, r20
+ 1f8:	5d 93       	st	X+, r21
+ 1fa:	2f 5f       	subi	r18, 0xFF	; 255
+ 1fc:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1fe:	20 31       	cpi	r18, 0x10	; 16
+ 200:	31 05       	cpc	r19, r1
+ 202:	69 f7       	brne	.-38     	; 0x1de <Transmit_Config_Data_2_DAC_with_arg+0x28>
+ 204:	29 98       	cbi	0x05, 1	; 5
+ 206:	9e 01       	movw	r18, r28
+ 208:	2f 5d       	subi	r18, 0xDF	; 223
+ 20a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 20c:	54 e0       	ldi	r21, 0x04	; 4
+ 20e:	48 e0       	ldi	r20, 0x08	; 8
+ 210:	2a 99       	sbic	0x05, 2	; 5
+ 212:	06 c0       	rjmp	.+12     	; 0x220 <Transmit_Config_Data_2_DAC_with_arg+0x6a>
+ 214:	95 b1       	in	r25, 0x05	; 5
+ 216:	80 81       	ld	r24, Z
+ 218:	88 0f       	add	r24, r24
+ 21a:	88 0f       	add	r24, r24
+ 21c:	89 27       	eor	r24, r25
+ 21e:	0b c0       	rjmp	.+22     	; 0x236 <Transmit_Config_Data_2_DAC_with_arg+0x80>
+ 220:	80 81       	ld	r24, Z
+ 222:	91 81       	ldd	r25, Z+1	; 0x01
+ 224:	00 97       	sbiw	r24, 0x00	; 0
+ 226:	19 f4       	brne	.+6      	; 0x22e <Transmit_Config_Data_2_DAC_with_arg+0x78>
+ 228:	85 b1       	in	r24, 0x05	; 5
+ 22a:	85 27       	eor	r24, r21
+ 22c:	04 c0       	rjmp	.+8      	; 0x236 <Transmit_Config_Data_2_DAC_with_arg+0x80>
+ 22e:	95 b1       	in	r25, 0x05	; 5
+ 230:	88 0f       	add	r24, r24
+ 232:	88 0f       	add	r24, r24
+ 234:	89 2b       	or	r24, r25
+ 236:	85 b9       	out	0x05, r24	; 5
+ 238:	85 b1       	in	r24, 0x05	; 5
+ 23a:	84 27       	eor	r24, r20
+ 23c:	85 b9       	out	0x05, r24	; 5
+ 23e:	85 b1       	in	r24, 0x05	; 5
+ 240:	84 27       	eor	r24, r20
+ 242:	85 b9       	out	0x05, r24	; 5
+ 244:	32 96       	adiw	r30, 0x02	; 2
+ 246:	e2 17       	cp	r30, r18
+ 248:	f3 07       	cpc	r31, r19
+ 24a:	11 f7       	brne	.-60     	; 0x210 <Transmit_Config_Data_2_DAC_with_arg+0x5a>
+ 24c:	29 9a       	sbi	0x05, 1	; 5
+ 24e:	2e 98       	cbi	0x05, 6	; 5
+ 250:	81 e0       	ldi	r24, 0x01	; 1
+ 252:	90 e0       	ldi	r25, 0x00	; 0
+ 254:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <DELAY_US>
+ 258:	2e 9a       	sbi	0x05, 6	; 5
+ 25a:	a0 96       	adiw	r28, 0x20	; 32
+ 25c:	0f b6       	in	r0, 0x3f	; 63
+ 25e:	f8 94       	cli
+ 260:	de bf       	out	0x3e, r29	; 62
+ 262:	0f be       	out	0x3f, r0	; 63
+ 264:	cd bf       	out	0x3d, r28	; 61
+ 266:	df 91       	pop	r29
+ 268:	cf 91       	pop	r28
+ 26a:	08 95       	ret
+
+0000026c <USART_INIT>:
+ 26c:	90 93 cd 00 	sts	0x00CD, r25	; 0x8000cd <__TEXT_REGION_LENGTH__+0x7e00cd>
+ 270:	80 93 cc 00 	sts	0x00CC, r24	; 0x8000cc <__TEXT_REGION_LENGTH__+0x7e00cc>
+ 274:	88 e1       	ldi	r24, 0x18	; 24
+ 276:	80 93 c9 00 	sts	0x00C9, r24	; 0x8000c9 <__TEXT_REGION_LENGTH__+0x7e00c9>
+ 27a:	08 95       	ret
+
+0000027c <Receive_From_PC>:
+ 27c:	80 91 c8 00 	lds	r24, 0x00C8	; 0x8000c8 <__TEXT_REGION_LENGTH__+0x7e00c8>
+ 280:	87 ff       	sbrs	r24, 7
+ 282:	fc cf       	rjmp	.-8      	; 0x27c <Receive_From_PC>
+ 284:	81 e0       	ldi	r24, 0x01	; 1
+ 286:	80 93 18 01 	sts	0x0118, r24	; 0x800118 <__data_end>
+ 28a:	80 91 ce 00 	lds	r24, 0x00CE	; 0x8000ce <__TEXT_REGION_LENGTH__+0x7e00ce>
+ 28e:	90 e0       	ldi	r25, 0x00	; 0
+ 290:	08 95       	ret
+
+00000292 <_exit>:
+ 292:	f8 94       	cli
+
+00000294 <__stop_program>:
+ 294:	ff cf       	rjmp	.-2      	; 0x294 <__stop_program>

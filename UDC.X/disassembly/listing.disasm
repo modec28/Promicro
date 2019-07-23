@@ -1,0 +1,326 @@
+Disassembly Listing for UDC
+Generated From:
+C:/Users/user/Documents/Atmel Studio/7.0/UDC/UDC/UDC.X/dist/Release/debug/UDC.X.debug.elf
+2019. 7. 22 오후 1:32:24
+
+---  C:/Users/user/Documents/Atmel Studio/7.0/UDC/UDC/main.c  -------------------------------------------
+1:             /*
+2:              * UDC.c
+3:              *
+4:              * Created: 2019-07-05 오후 3:52:00
+5:              * Author : Grant
+6:              * E-mail : grant@tescom.org
+7:              */ 
+8:             
+9:             #include "UDC.X/SPI_ADRF.h"
+10:            #include "UDC.X/SPI_DAC.h"
+11:            #include "UDC.X/_USART_Com.h"
+12:            #include "UDC.X/Delay.h"
+13:            #include <string.h>
+14:            
+15:            #define SPI_DATA_LENGTH 2
+16:            
+17:            void _init()
+18:            {
+19:                //initialize
+20:                ADRF_DAC_INIT();
+0075  940E     CALL Transmit_Config_Data_2_IQ_Baseband_Filter
+21:            	USART_INIT(51);
+0077  E383     LDI R24, 0x33
+0078  E090     LDI R25, 0x00
+0079  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+22:            }
+23:            int main(void)
+24:            {
+007B  93CF     PUSH R28
+007C  93DF     PUSH R29
+007D  D000     RCALL 0x7E
+007E  B7CD     IN R28, 0x3D
+007F  B7DE     IN R29, 0x3E
+25:                char Rx_Buffer[SPI_DATA_LENGTH];
+26:                char *Rx_String = "";
+27:                int Rx_CNT = 0;
+0082  E000     LDI R16, 0x00
+0083  E010     LDI R17, 0x00
+28:                
+29:            	_init();
+0080  940E     CALL Transmit_Config_Data_2_IQ_Baseband_Filter
+30:                
+31:                //Transmit_Config_Data_2_IQ_Baseband_Filter();
+32:                //Transmit_Config_Data_2_DAC();
+33:                //Transmit_Config_Data_2_DAC_with_arg(0xCDCC);
+34:                
+35:                while(1)
+36:                {
+37:                    Rx_Buffer[Rx_CNT++] = PC_Transmit_2_USART();
+0084  940E     CALL Transmit_Config_Data_2_IQ_Baseband_Filter
+0086  E0E1     LDI R30, 0x01
+0087  E0F0     LDI R31, 0x00
+0088  0FEC     ADD R30, R28
+0089  1FFD     ADC R31, R29
+008A  0FE0     ADD R30, R16
+008B  1FF1     ADC R31, R17
+008C  8380     ST Z, R24
+38:                    char T1_DATA[SPI_DATA_LENGTH] = "As";
+39:                    if(Rx_CNT==SPI_DATA_LENGTH)
+008D  3001     CPI R16, 0x01
+008E  0511     CPC R17, R1
+008F  F471     BRNE 0x9E
+40:                    {
+41:                        Rx_CNT = 0;
+42:                        memcpy(Rx_String,Rx_Buffer,SPI_DATA_LENGTH);
+0090  8189     LDD R24, Y+1
+0091  819A     LDD R25, Y+2
+0092  9390     STS 0x00, R25
+0093  0101     MOVW R0, R2
+0094  9380     STS 0x00, R24
+0095  0100     MOVW R0, R0
+43:                        USART_Transmit_2_PC_STR(Rx_String);
+0096  E080     LDI R24, 0x00
+0097  E091     LDI R25, 0x01
+0098  940E     CALL Transmit_Config_Data_2_IQ_Baseband_Filter
+44:                        if(strcmp(Rx_String,T1_DATA)==0)
+45:                            USART_Transmit_2_PC_CHAR('A'); //A 이렇게 받아진다.
+46:                        else
+47:                            USART_Transmit_2_PC_CHAR('C'); //C
+009A  E483     LDI R24, 0x43
+009B  940E     CALL Transmit_Config_Data_2_IQ_Baseband_Filter
+009D  CFE4     RJMP 0x82
+009E  E001     LDI R16, 0x01
+009F  E010     LDI R17, 0x00
+48:                        
+49:                        //USART_Transmit_2_PC(Rx_Buffer[Rx_CNT-1]);
+50:                    }
+51:                }
+00A0  CFE3     RJMP 0x84
+52:            }
+53:            
+---  C:/Users/user/Documents/Atmel Studio/7.0/UDC/UDC/UDC.X/_USART_Com.c  -------------------------------
+1:             /* 
+2:              * File:   _USART_Com.c
+3:              * Author: Grant
+4:              * E-mail : grant@tescom.org
+5:              * Created on 2019-7-15 (mon), PM 5:06
+6:              */
+7:             #include "_USART_Com.h"
+8:             #include "DefineScript.h"
+9:             
+10:            void USART_INIT(unsigned int baud)
+11:            {
+12:            	UBRR1H = (unsigned char)(baud>>8);
+00B1  9390     STS 0x00, R25
+13:                UBRR1L = (unsigned char)baud;
+00B3  9380     STS 0x00, R24
+14:            	UCSR1B = (1<<RXEN1) | (1<<TXEN1); // TX, RX ENB
+00B5  E188     LDI R24, 0x18
+00B6  9380     STS 0x00, R24
+00B8  9508     RET
+15:            	//8bit, 1stopbit
+16:            }
+17:            void USART_Transmit_2_PC_CHAR(char data)
+18:            {
+19:            	while(!(UCSR1A&(1<<UDRE1)));
+00B9  9190     LDS R25, 0x00
+00BB  FF95     SBRS R25, 5
+00BC  CFFC     RJMP USART_Transmit_2_PC_CHAR
+20:            	
+21:            	UDR1 = data;
+00BD  9380     STS 0x00, R24
+00BF  9508     RET
+22:            }
+23:            void USART_Transmit_2_PC_STR(char *data)
+24:            {
+00C0  93CF     PUSH R28
+00C1  93DF     PUSH R29
+00C2  01EC     MOVW R28, R24
+25:            	while(*data)
+00C3  9189     LD R24, Y+
+00C4  2388     AND R24, R24
+00C5  F019     BREQ 0xC9
+26:                    USART_Transmit_2_PC_CHAR(*data++);
+00C6  940E     CALL Transmit_Config_Data_2_IQ_Baseband_Filter
+00C8  CFFA     RJMP 0xC3
+27:            }
+00C9  91DF     POP R29
+00CA  91CF     POP R28
+00CB  9508     RET
+28:            char PC_Transmit_2_USART()
+29:            {
+30:                while(!(UCSR1A&(1<<RXC1)));
+00CC  9180     LDS R24, 0x00
+00CE  FF87     SBRS R24, 7
+00CF  CFFC     RJMP PC_Transmit_2_USART
+31:                Rx_Flag = 1;
+00D0  E081     LDI R24, 0x01
+00D1  9380     STS 0x00, R24
+00D2  0102     MOVW R0, R4
+32:                return UDR1;
+00D3  9180     LDS R24, 0x00
+33:            }
+00D5  9508     RET
+---  C:/Users/user/Documents/Atmel Studio/7.0/UDC/UDC/UDC.X/SPI_ADRF.c  ---------------------------------
+1:             /* 
+2:              * File:   SPI_ADRF.c
+3:              * Author: Grant
+4:              * E-mail : grant@tescom.org
+5:              *
+6:              * Created on 2019년 7월 9일 (화), 오후 2:20
+7:              */
+8:             
+9:             #include "DefineScript.h"
+10:            #include "SPI_ADRF.h"
+11:            #include "Delay.h"
+12:            
+13:            #define ADRF_RST_Dir (DDRD |= BIT7)
+14:            #define ADRF_SCLK_Dir (DDRE |= BIT6)
+15:            #define ADRF_SDIO_Dir_IN (DDRB &= ~BIT4)
+16:            #define ADRF_SDIO_Dir_OUT (DDRB |= BIT4)
+17:            #define ADRF_CS_Dir (DDRB |= BIT5)
+18:            
+19:            #define ADRF_RST_H (PORTD |= BIT7)
+20:            #define ADRF_RST_L (PORTD &= ~BIT7)
+21:            #define ADRF_SCLK (PORTE &= ~BIT6)
+22:            #define ADRF_SCLK_S (PORTE ^= BIT6)
+23:            #define ADRF_SDIO (PORTB &= ~BIT4)
+24:            #define ADRF_CS_H (PORTB |= BIT5)
+25:            #define ADRF_CS_L (PORTB &= ~BIT5)
+26:            
+27:            #define ADRF_PIN BIT4
+28:            #define ADRF_SDIO_D(x) ((PORTB&ADRF_PIN)!=ADRF_PIN)?(PORTB ^= x):(x==0x00)?(PORTB^=ADRF_PIN):(PORTB |= x);
+29:            
+30:            #define ADRF_DATA_LENGTH 24
+31:            
+32:            void ADRF_DAC_INIT()
+33:            {
+34:                ///////////ADRF////////////////
+35:                
+36:                //OUTPUT
+37:                ADRF_CS_Dir; //CS PIN is OUTPUT 
+00A1  9A25     SBI 0x04, 5
+38:                ADRF_RST_Dir; //RST PIN is OUTPUT 
+00A2  9A57     SBI 0x0A, 7
+39:                ADRF_SCLK_Dir; //SCLK PIN is OUTPUT 
+00A3  9A6E     SBI 0x0D, 6
+40:                ADRF_SDIO_Dir_OUT; //SDIO PIN is OUTPUT 
+00A4  9A24     SBI 0x04, 4
+41:                
+42:                //Idle
+43:                ADRF_CS_H; //CS PIN is HIGH
+00A5  9A2D     SBI 0x05, 5
+44:                ADRF_SCLK; //SCLK PIN is LOW at first
+00A6  9876     CBI 0x0E, 6
+45:                ADRF_SDIO; //SDIO PIN is LOW
+00A7  982C     CBI 0x05, 4
+46:            	
+47:                ///////////////DAC////////////////
+48:            	//OUTPUT
+49:                DAC_CS_Dir; //CS PIN is OUTPUT 
+00A8  9A21     SBI 0x04, 1
+50:                DAC_LDAC_Dir; //RST PIN is OUTPUT 
+00A9  9A26     SBI 0x04, 6
+51:                DAC_SCLK_Dir; //SCLK PIN is OUTPUT 
+00AA  9A23     SBI 0x04, 3
+52:                DAC_SDIO_Dir_OUT; //SDIO PIN is OUTPUT 
+00AB  9A22     SBI 0x04, 2
+53:                
+54:                //Idle
+55:                DAC_CS_H; //CS PIN is HIGH
+00AC  9A29     SBI 0x05, 1
+56:                DAC_SCLK; //SCLK PIN is LOW at first
+00AD  982B     CBI 0x05, 3
+57:                DAC_SDIO; //SDIO PIN is LOW
+00AE  982A     CBI 0x05, 2
+58:            	DAC_LDAC_H; //LDAC PIN is HIGH    
+00AF  9A2E     SBI 0x05, 6
+00B0  9508     RET
+59:            }
+60:            
+61:            const uint8_t ADRF_Data[] =
+62:            {
+63:            	//This is data for SDIO pin
+64:            	
+65:            	//Read=1, Write=0
+66:            	0,
+67:            	//Address
+68:            	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+69:            	//Data
+70:            	1, 0, 0, 0, 0, 0, 1, 0 //144Mhz, DCoffset_Disable	
+71:            };
+72:            
+73:            void Transmit_Config_Data_2_IQ_Baseband_Filter()
+74:            {
+75:                //Reset
+76:                ADRF_RST_H; //RST PIN is HIGH
+77:            	DELAY_US(1);
+78:            	ADRF_RST_L; //RST PIN is LOW
+79:            	DELAY_US(1);
+80:            	ADRF_RST_H; //RST PIN is HIGH
+81:                ADRF_CS_L; //Ready to TX
+82:                for(int index=0; index<ADRF_DATA_LENGTH; index++)//1.Data 2.CLK
+83:                {
+84:            		ADRF_SDIO_D(ADRF_Data[index]*BIT4); //Write to ADRF
+85:                    
+86:                    ////_ Delay for Data setup time>(Clock Period/4) _///
+87:                    asm volatile("PUSH R0");
+88:            		asm volatile("POP R0");
+89:                    asm volatile("nop");
+90:                    ///////////////////////////////
+91:                    
+92:            	    ADRF_SCLK_S; //CLK Rise
+93:            		ADRF_SCLK_S; //CLK Fall
+94:                }
+95:                ADRF_CS_H;
+96:            }
+---  ././././crt1/gcrt1.S  ------------------------------------------------------------------------------
+0000  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0002  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0004  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0006  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0008  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+000A  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+000C  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+000E  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0010  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0012  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0014  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0016  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0018  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+001A  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+001C  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+001E  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0020  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0022  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0024  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0026  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0028  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+002A  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+002C  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+002E  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0030  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0032  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0034  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0036  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0038  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+003A  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+003C  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+003E  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0040  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0042  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0044  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0046  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0048  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+004A  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+004C  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+004E  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0050  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0052  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0054  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0073  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
+0056  2411     EOR R1, R1
+0057  BE1F     OUT 0x3F, R1
+0058  EFCF     LDI R28, 0xFF
+0059  E0DA     LDI R29, 0x0A
+005A  BFDE     OUT 0x3E, R29
+005B  BFCD     OUT 0x3D, R28
+006F  940E     CALL Transmit_Config_Data_2_IQ_Baseband_Filter
+0071  940C     JMP Transmit_Config_Data_2_IQ_Baseband_Filter
